@@ -213,7 +213,8 @@ class YModem(object):
                 else:
                     self.log.warn("Expected 0x04(EOT), but got " + hex(ord(c)))
 
-    def recv_file(self, root_path, callback=None):
+    #def recv_file(self, root_path, callback=None):
+    def recv_file(self, file_path, callback=None):
         while True:
             self.putc(CRC)
             self.log.debug("<<< CRC")
@@ -283,7 +284,8 @@ class YModem(object):
                             self.log.debug("TASK: " + file_name + " " + data_size + "Bytes")
                             self.rt.set_task_name(file_name)
                             self.rt.set_task_size(int(data_size))
-                            file_stream = open(os.path.join(root_path, file_name), 'wb+')
+                            #file_stream = open(os.path.join(root_path, file_name), 'wb+')
+                            file_stream = open(file_path, 'wb+')
                             FIRST_PACKET_RECEIVED = True
                             sequence = (sequence + 1) % 0x100
 
